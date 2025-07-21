@@ -1,8 +1,6 @@
-import { IsString, IsNumber, IsBoolean } from 'class-validator';
+import { IsString, IsBoolean } from 'class-validator';
 
 export class CreateAppDto {
-    @IsNumber()
-    id: number;
 
     @IsString()
     title: string;
