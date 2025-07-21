@@ -1,14 +1,20 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NestMiddleware } from '@nestjs/common';
 import { withAccelerate } from '@prisma/extension-accelerate';
+import { NextFunction, Request, Response } from 'express';
 import { PrismaClient, Tasks } from 'generated/prisma';
 import { CreateAppDto } from 'src/app/dto/create-app.dto';
 
 @Injectable()
-export class TaskService {
-  private prisma: PrismaClient;
+export class TaskService implements NestMiddleware {
+  private prisma: PrismaClient; //declarei o prisma o "molde"
+
+  use(req: Request, res: Response, next: NextFunction) {
+    console.log('Method not implemented.');
+    next();
+  }
 
   constructor() {
-    this.prisma = new PrismaClient();
+    this.prisma = new PrismaClient(); //Inicalização de um instância do prisma
     this.prisma.$extends(withAccelerate());
   }
 
